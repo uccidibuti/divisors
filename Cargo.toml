@@ -1,0 +1,22 @@
+[package]
+name = "divisors"
+version = "0.1.0"
+authors = ["uccidibuti <lorenzo@vannucci.io>"]
+description = "A blazing fast library to find all divisors of a natural number."
+license = "MIT"
+edition = "2018"
+
+[lib]
+name = "divisors"
+crate-type = ["rlib"]
+
+[dependencies]
+num = "0.2"
+
+[dev-dependencies]
+rand = "^0.6.5"
+criterion = "0.2"
+
+[[bench]]
+name = "big_numbers"
+harness = false
