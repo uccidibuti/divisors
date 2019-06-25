@@ -17,6 +17,17 @@ finding divisors of 934832147123321
 time = 663.484µs, divisors = [19, 5011, 63397, 95209, 154877, 1204543, 2942663, 317682367, 776088647, 6035964973, 9818737169, 14745684293, 186556006211, 49201691953859]
 */
 ```
+## Usage
+Add this to your `Cargo.toml`:
+```toml
+[dependencies]
+divisors = "0.1.4"
+```
+
+and this to your crate root:
+```rust
+extern crate divisors;
+```
 
 ## Documentations
 ```sh
