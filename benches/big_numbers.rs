@@ -29,7 +29,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 /// geeksforgeeks solution: https://www.geeksforgeeks.org/find-divisors-natural-number-set-1/
 fn get_divisors_standard(n: u64) -> Vec<u64> {
     let mut v = Vec::new();
-    let n_sqrt = (n as f64).sqrt() as u64;
+    let n_sqrt = (n as f64).sqrt() as u64 + 1;
 
     for i in 2..n_sqrt {
         if  n % i == 0 {
