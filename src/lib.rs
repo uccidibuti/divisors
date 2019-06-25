@@ -12,7 +12,7 @@ impl Num for u64 {}
 impl Num for u128 {}
 impl Num for usize {}
 
-/// Return a vector with all divisors ordered of n in range (1, n-1)
+/// Return a vector with all divisors ordered of n in range (1, n)
 pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
     
     let _0: T = T::zero();
