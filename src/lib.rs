@@ -1,3 +1,7 @@
+//! # divisors
+//!
+//! divisors is a blazing fast library to get all divisors of a natural number.
+
 extern crate num;
 
 use num::{Unsigned, NumCast, PrimInt};
@@ -12,7 +16,21 @@ impl Num for u64 {}
 impl Num for u128 {}
 impl Num for usize {}
 
-/// Return a vector with all divisors ordered of n in range (1, n)
+/// Return a vector with all divisors ordered of n in range (1, n-1).
+///
+/// # Example
+///
+/// ```
+/// use std::time::{Instant};
+///
+/// fn main() {
+///     let n: u128 = 934832147123321;
+///     println!("finding divisors of {}", n);
+///     let start_time = Instant::now();
+///     let v = divisors::get_divisors(n);
+///     println!("time = {:?}, divisors = {:?}", start_time.elapsed(), v);
+/// }
+/// ```
 pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
     
     let _0: T = T::zero();
@@ -30,15 +48,20 @@ pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
     
     let mut _x: T = T::from(3).unwrap();
     let mut _n_sqrt: T = approximated_sqrt(_n);
-    while _x < _n_sqrt {
+    while _x < _n_sqrt {        
         let mut _pow_x = _x;
         let v_len = v.len();
         let mut x_is_a_divisors = false;
-        while _n % _x == _0 {
+
+        let mut pow_x_is_a_divisors = _n % _x == _0;
+        while pow_x_is_a_divisors == true {
             _n = _n.div(_x);
             v.push(_pow_x);
             push_new_divisors(&mut v, v_len, _pow_x);
-            _pow_x = _pow_x.mul(_x);
+            pow_x_is_a_divisors = _n % _x == _0;
+            if pow_x_is_a_divisors == true {
+                _pow_x = _pow_x.mul(_x);                
+            }
             x_is_a_divisors = true;
         }
         _x = _x + _2;
@@ -61,8 +84,18 @@ pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
     v
 }
 
-/// Return a number greather then sqrt(n)
-fn approximated_sqrt<T: Num>(n: T) -> T {
+/// Return a number near and greather then sqrt(n).
+///
+/// # Example
+///
+/// ```
+/// fn main() {
+///     let n: u32 = 63;
+///     let n_sqrt  = divisors::approximated_sqrt(n);
+///     assert_eq!(n_sqrt, 8);
+/// }
+/// ```
+pub fn approximated_sqrt<T: Num>(n: T) -> T {
     let _0: T = T::zero();
     let _1: T = T::one();
     let mut num_bits = (std::mem::size_of::<T>() << 3) - 1;

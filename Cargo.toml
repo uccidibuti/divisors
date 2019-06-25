@@ -6,6 +6,7 @@ description = "A blazing fast library to find all divisors of a natural number."
 license = "MIT"
 documentation = "https://github.com/uccidibuti/divisors"
 repository = "https://github.com/uccidibuti/divisors"
+readme = "README.md"
 edition = "2018"
 
 [lib]
