@@ -9,6 +9,7 @@ fn test() {
     
     for _i in 0..10000 {
         let n: u32 = rng.gen::<u32>();
+        if n == 0 { continue; }
         let v0 = divisors::get_divisors(n);
         let v1 = get_divisors_standard(n);
 
