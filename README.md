@@ -21,7 +21,7 @@ time = 663.484µs, divisors = [19, 5011, 63397, 95209, 154877, 1204543, 2942663,
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-divisors = "0.1.4"
+divisors = "0.1.5"
 ```
 
 and this to your crate root:
@@ -33,6 +33,7 @@ extern crate divisors;
 ```sh
 cargo doc --no-deps --open
 ```
+[link](https://docs.rs/divisors/) 
 
 ## Benchmarks
 ```sh

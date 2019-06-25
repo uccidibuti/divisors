@@ -1,10 +1,10 @@
 [package]
 name = "divisors"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["uccidibuti <lorenzo@vannucci.io>"]
 description = "A blazing fast library to find all divisors of a natural number."
 license = "MIT"
-documentation = "https://github.com/uccidibuti/divisors"
+documentation = "https://docs.rs/divisors/"
 repository = "https://github.com/uccidibuti/divisors"
 readme = "README.md"
 edition = "2018"
