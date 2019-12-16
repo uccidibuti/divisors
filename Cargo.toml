@@ -13,6 +13,8 @@ edition = "2018"
 name = "divisors"
 crate-type = ["rlib"]
 
+categories = ["mathematics", "algorithms"]
+
 [dependencies]
 num = "0.2"
 
