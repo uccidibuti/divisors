@@ -23,11 +23,6 @@ Add this to your `Cargo.toml`:
 divisors = "0.2.1"
 ```
 
-and this to your crate root:
-```rust
-extern crate divisors;
-```
-
 ## Documentations
 ```sh
 cargo doc --no-deps --open
