@@ -2,7 +2,6 @@
 A blazing fast Rust library to find all divisors of a natural number. This library works with u8, u16, u32, u64, u128 and usize types.
 ## Example
 ``` Rust
-extern crate divisors;
 use std::time::{Instant};
 
 fn main() {
@@ -21,7 +20,7 @@ time = 663.484µs, divisors = [19, 5011, 63397, 95209, 154877, 1204543, 2942663,
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-divisors = "0.1.5"
+divisors = "0.2.0"
 ```
 
 and this to your crate root:

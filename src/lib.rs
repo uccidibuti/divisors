@@ -2,8 +2,6 @@
 //!
 //! divisors is a blazing fast library to get all divisors of a natural number.
 
-extern crate num;
-
 use num::{Unsigned, NumCast, PrimInt};
 use std::fmt::Display;
 
