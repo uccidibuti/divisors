@@ -20,7 +20,7 @@ time = 663.484µs, divisors = [19, 5011, 63397, 95209, 154877, 1204543, 2942663,
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-divisors = "0.2.0"
+divisors = "0.2.1"
 ```
 
 and this to your crate root:

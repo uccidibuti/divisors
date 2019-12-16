@@ -1,6 +1,6 @@
 [package]
 name = "divisors"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["uccidibuti <lorenzo@vannucci.io>"]
 description = "A blazing fast library to find all divisors of a natural number."
 license = "MIT"
@@ -8,12 +8,12 @@ documentation = "https://docs.rs/divisors/"
 repository = "https://github.com/uccidibuti/divisors"
 readme = "README.md"
 edition = "2018"
+categories = ["mathematics", "algorithms"]
 
 [lib]
 name = "divisors"
 crate-type = ["rlib"]
 
-categories = ["mathematics", "algorithms"]
 
 [dependencies]
 num = "0.2"
