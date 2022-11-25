@@ -50,9 +50,9 @@ pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
     while x < number_sqrt {
         let mut pow_x = x;
         let v_len = v.len();
-        let mut x_is_a_divisors = false;
 
-        let mut pow_x_is_a_divisors = number % x == zero;
+        let x_is_a_divisors = number % x == zero;
+        let mut pow_x_is_a_divisors = x_is_a_divisors;
         while pow_x_is_a_divisors {
             number = number.div(x);
             v.push(pow_x);
@@ -61,12 +61,11 @@ pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
             if pow_x_is_a_divisors {
                 pow_x = pow_x.mul(x);
             }
-            x_is_a_divisors = true;
         }
-        x = x + two;
         if x_is_a_divisors {
             number_sqrt = approximated_sqrt(number);
         }
+        x = x + two;
     }
 
     if number > one && number != n {
