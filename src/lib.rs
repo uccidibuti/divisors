@@ -105,6 +105,6 @@ pub fn approximated_sqrt<T: Num>(n: T) -> T {
 /// Iterate on `v` from `0` to `v_len` and for each element `e`: push `e * x` in `v`.
 fn push_new_divisors<T: Num>(v: &mut Vec<T>, v_len: usize, x: T) {
     for i in 0..v_len {
-        v.push(x.mul(unsafe { *v.get_unchecked(i) }));
+        v.push(x.mul(*v.get(i).unwrap()));
     }
 }
