@@ -24,9 +24,9 @@ fn test() {
 /// geeksforgeeks solution: https://www.geeksforgeeks.org/find-divisors-natural-number-set-1/
 fn get_divisors_standard(n: u32) -> Vec<u32> {
     let mut v = Vec::new();
-    let n_sqrt = (n as f32).sqrt() as u32 + 1;
+    let n_sqrt = (n as f32).sqrt() as u32;
 
-    for i in 2..n_sqrt {
+    for i in 1..=n_sqrt {
         if n % i == 0 {
             if n / i == i {
                 v.push(i);

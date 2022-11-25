@@ -14,7 +14,7 @@ impl Num for u64 {}
 impl Num for u128 {}
 impl Num for usize {}
 
-/// Return a vector with all divisors ordered of n in range (1, n-1).
+/// Return a sorted vector with all divisors of `n`.
 ///
 /// # Example
 ///
@@ -27,16 +27,16 @@ impl Num for usize {}
 /// let v = divisors::get_divisors(n);
 /// println!("time = {:?}, divisors = {:?}", start_time.elapsed(), v);
 /// ```
-/// 
+///
 /// # Panics
-/// 
-/// A panic could happen if number 2 or 3 cannot be converted to T.
+///
+/// A panic could happen if `2` or `3` cannot be converted to `T`.
 pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
     let zero = T::zero();
     let one = T::one();
     let two = T::from(2).unwrap();
     let mut number = n;
-    let mut v = Vec::new();
+    let mut v = vec![one];
 
     let mut count_divisors_2: usize = 0;
     while number & one == zero {
@@ -55,7 +55,6 @@ pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
         let mut pow_x_is_a_divisors = x_is_a_divisors;
         while pow_x_is_a_divisors {
             number = number.div(x);
-            v.push(pow_x);
             push_new_divisors(&mut v, v_len, pow_x);
             pow_x_is_a_divisors = number % x == zero;
             if pow_x_is_a_divisors {
@@ -70,15 +69,10 @@ pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
 
     if number > one && number != n {
         let v_len = v.len();
-        v.push(number);
         push_new_divisors(&mut v, v_len, number);
     }
 
-    if v.len() > 1 {
-        v.sort();
-        v.pop();
-    }
-
+    v.sort();
     v
 }
 
