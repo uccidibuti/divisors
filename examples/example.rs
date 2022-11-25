@@ -1,5 +1,5 @@
 use divisors;
-use std::time::{Instant};
+use std::time::Instant;
 
 fn main() {
     let n: u128 = 934832147123321;
