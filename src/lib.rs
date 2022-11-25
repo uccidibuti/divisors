@@ -19,58 +19,60 @@ impl Num for usize {}
 /// # Example
 ///
 /// ```
-/// use std::time::{Instant};
+/// use std::time::Instant;
 ///
-/// fn main() {
-///     let n: u128 = 934832147123321;
-///     println!("finding divisors of {}", n);
-///     let start_time = Instant::now();
-///     let v = divisors::get_divisors(n);
-///     println!("time = {:?}, divisors = {:?}", start_time.elapsed(), v);
-/// }
+/// let n: u128 = 934832147123321;
+/// println!("finding divisors of {}", n);
+/// let start_time = Instant::now();
+/// let v = divisors::get_divisors(n);
+/// println!("time = {:?}, divisors = {:?}", start_time.elapsed(), v);
 /// ```
+/// 
+/// # Panics
+/// 
+/// A panic could happen if number 2 or 3 cannot be converted to T.
 pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
-    let _0: T = T::zero();
-    let _1: T = T::one();
-    let _2: T = T::from(2).unwrap();
-    let mut _n = n;
-    let mut v: Vec<T> = Vec::new();
+    let zero = T::zero();
+    let one = T::one();
+    let two = T::from(2).unwrap();
+    let mut number = n;
+    let mut v = Vec::new();
 
     let mut count_divisors_2: usize = 0;
-    while _n & _1 == _0 {
-        v.push(_2 << count_divisors_2);
+    while number & one == zero {
+        v.push(two << count_divisors_2);
         count_divisors_2 += 1;
-        _n = _n >> 1;
+        number = number >> 1;
     }
 
-    let mut _x: T = T::from(3).unwrap();
-    let mut _n_sqrt: T = approximated_sqrt(_n);
-    while _x < _n_sqrt {
-        let mut _pow_x = _x;
+    let mut x = T::from(3).unwrap();
+    let mut number_sqrt = approximated_sqrt(number);
+    while x < number_sqrt {
+        let mut pow_x = x;
         let v_len = v.len();
         let mut x_is_a_divisors = false;
 
-        let mut pow_x_is_a_divisors = _n % _x == _0;
-        while pow_x_is_a_divisors == true {
-            _n = _n.div(_x);
-            v.push(_pow_x);
-            push_new_divisors(&mut v, v_len, _pow_x);
-            pow_x_is_a_divisors = _n % _x == _0;
-            if pow_x_is_a_divisors == true {
-                _pow_x = _pow_x.mul(_x);
+        let mut pow_x_is_a_divisors = number % x == zero;
+        while pow_x_is_a_divisors {
+            number = number.div(x);
+            v.push(pow_x);
+            push_new_divisors(&mut v, v_len, pow_x);
+            pow_x_is_a_divisors = number % x == zero;
+            if pow_x_is_a_divisors {
+                pow_x = pow_x.mul(x);
             }
             x_is_a_divisors = true;
         }
-        _x = _x + _2;
-        if x_is_a_divisors == true {
-            _n_sqrt = approximated_sqrt(_n);
+        x = x + two;
+        if x_is_a_divisors {
+            number_sqrt = approximated_sqrt(number);
         }
     }
 
-    if _n > _1 && _n != n {
+    if number > one && number != n {
         let v_len = v.len();
-        v.push(_n);
-        push_new_divisors(&mut v, v_len, _n);
+        v.push(number);
+        push_new_divisors(&mut v, v_len, number);
     }
 
     if v.len() > 1 {
@@ -86,26 +88,24 @@ pub fn get_divisors<T: Num>(n: T) -> Vec<T> {
 /// # Example
 ///
 /// ```
-/// fn main() {
-///     let n: u32 = 63;
-///     let n_sqrt  = divisors::approximated_sqrt(n);
-///     assert_eq!(n_sqrt, 8);
-/// }
+/// let n: u32 = 63;
+/// let n_sqrt  = divisors::approximated_sqrt(n);
+/// assert_eq!(n_sqrt, 8);
 /// ```
 pub fn approximated_sqrt<T: Num>(n: T) -> T {
-    let _0: T = T::zero();
-    let _1: T = T::one();
+    let zero: T = T::zero();
+    let one: T = T::one();
     let mut num_bits = (std::mem::size_of::<T>() << 3) - 1;
-    while ((n >> num_bits) & _1) == _0 {
+    while ((n >> num_bits) & one) == zero {
         num_bits -= 1;
     }
 
-    _1 << ((num_bits >> 1) + 1)
+    one << ((num_bits >> 1) + 1)
 }
 
-/// Iterate on v from 0 to v_len and for each element e: push (e * _x) in v.
-fn push_new_divisors<T: Num>(v: &mut Vec<T>, v_len: usize, _x: T) {
+/// Iterate on `v` from `0` to `v_len` and for each element `e`: push `e * x` in `v`.
+fn push_new_divisors<T: Num>(v: &mut Vec<T>, v_len: usize, x: T) {
     for i in 0..v_len {
-        v.push(_x.mul(unsafe { *v.get_unchecked(i) }));
+        v.push(x.mul(unsafe { *v.get_unchecked(i) }));
     }
 }
